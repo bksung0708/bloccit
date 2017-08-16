@@ -13,7 +13,9 @@
    gem 'pg'
    gem 'rails_12factor'
  end
- 
+
+ gem 'pry-rails', :group => :development
+
  group :development do
    # Use sqlite3 as the development database for Active Record
    gem 'sqlite3'
