@@ -42,6 +42,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    unless current_user.moderator?
       @post = Post.find(params[:id])
 
       if @post.destroy
@@ -51,6 +52,7 @@ class PostsController < ApplicationController
           flash.now[:alert] = "There was an error deleting the post."
           render :show
       end
+    end
   end
 
   private

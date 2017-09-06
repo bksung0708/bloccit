@@ -2,7 +2,7 @@ class TopicsController < ApplicationController
 
   before_action :require_sign_in, except: [:index, :show]
 
-  before_action :authorize_user, except: [:index, :show]
+  before_action :authorize_user, except: [:index, :show, :edit, :update]
 
   def index
     @topics = Topic.all
@@ -28,19 +28,23 @@ class TopicsController < ApplicationController
   end
 
   def edit
-    @topic = Topic.find(params[:id])
+    unless current_user.member?
+      @topic = Topic.find(params[:id])
+    end
   end
 
   def update
-    @topic = Topic.find(params[:id])
-    @topic.assign_attributes(topic_params)
+    unless current_user.member?
+      @topic = Topic.find(params[:id])
+      @topic.assign_attributes(topic_params)
 
-    if @topic.save
-        flash[:notice] = "Topic was updated."
-        redirect_to @topic
-        else
-        flash.now[:alert] = "Error saving topic. Please try again."
-        render :edit
+      if @topic.save
+          flash[:notice] = "Topic was updated."
+          redirect_to @topic
+          else
+          flash.now[:alert] = "Error saving topic. Please try again."
+          render :edit
+      end
     end
   end
 
