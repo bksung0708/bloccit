@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   validates :name, length: { minimum: 1, maximum: 100 }, presence: true
 
-  validates :password, presence: true, length: { minimum: 6 }, if: "password_digest.nil?"
+  validates :password, presence: true, length: { minimum: 6 }, if: :validate_password
   validates :password, length: { minimum: 6 }, allow_blank: true
 
   validates :email,
@@ -19,4 +19,10 @@ class User < ApplicationRecord
   has_secure_password
 
   enum role: [:member, :admin]
+
+  private
+
+  def validate_password
+    password_digest.nil?
+  end
 end
