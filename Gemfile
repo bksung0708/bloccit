@@ -49,3 +49,6 @@
 
  # Used for encrypting passwords
  gem 'bcrypt'
+
+ # Used for handling sensitive data with environment variables
+ gem 'figaro', '1.0'
