@@ -1,8 +1,4 @@
-New comment to "<%= @post.title %>"
+You're following, "<%= @post.title %>"
 <%= "=" * (@post.title.length + 12) %>
 
-By: <%= @comment.user.name %>
-
-<%= @comment.body %>
-
-Visit online at: <%= topic_post_url(@post.topic, @post, anchor: "comment-#{@comment.id}") %>
+Visit online at: <%= topic_post_url(@post.topic, @post) %>
