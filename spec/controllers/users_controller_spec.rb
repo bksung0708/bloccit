@@ -60,7 +60,6 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-
   describe "not signed in" do
     let(:factory_user) { create(:user) }
 
