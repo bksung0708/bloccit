@@ -29,4 +29,6 @@
 <%= render @user.comments %>
 
 <h2>Favorites</h2>
-<%= @user.favorites.each do |x| x end %>
+<% @user.favorites.each do |favorite| %>
+  <%= render favorite.post %>
+<% end %>
